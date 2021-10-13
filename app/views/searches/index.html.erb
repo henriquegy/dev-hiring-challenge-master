@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+
+    <div class="col-sm">
+      <%= render "form", search: @searches %>
+
+      <div class="card">
+        <div class="card-header">
+          Tip
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>To search repository by then name, tap: </p>
+            <footer class="text-secondary" style="font-size: 18px;"><cite title="Source Title">reponame</cite></footer>
+          </blockquote>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p>To search repository by then name and type, tap: </p>
+            <footer class="text-secondary" style="font-size: 18px;"><cite title="Source Title">reponame+language:ruby (Without spaces between query.)</cite></footer>
+          </blockquote>
+        </div>
+
+        <%= link_to "See more in GitHub doc.", "https://docs.github.com/en/rest/reference/search#timeouts-and-incomplete-results", target: "_blank" %>
+      </div>
+    </div>
+
+    <div class="col-1"></div>
+  </div>
+</div>

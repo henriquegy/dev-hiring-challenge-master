@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+
+    <div class="col-sm">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Repo Nome</th>
+            <th scope="col">Repo Link</th>
+            <th scope="col">Repo ID</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% unless @favorite_repos.nil? %>
+            <% @favorite_repos.each do |repo| %>
+              <tr>
+                <th scope="row"><%= repo&.id %></th>
+                <td><%= repo&.repo_name %></td>
+                <td><a href="<%= repo&.repo_link %>" target="_blank"><%= repo&.repo_link %></a></td>
+                <td><%= repo&.repo_id%></td>
+                <input name='_method' value='delete' type='hidden' />
+                <td><a href="<%= search_path(repo&.id) %>" data-method="delete" rel="nofollow" style="cursor: pointer"><%= icon("trash") %></a></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-1"></div>
+  </div>
+</div>

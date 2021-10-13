@@ -1,0 +1,86 @@
+<% unless @repositories.nil? %>
+  <div class="text-secondary">
+    Founded: <b> <%= @repositories["total_count"] %> </b> Listed: <b> <%= @repositories["items"].length %> </b> because timeout of api GitHub
+  </div>
+
+  <% count = 0 %>
+
+  <% @repositories["items"].each do |item| %>
+    <% count += 1 %>
+
+    <div class="card mb-3" style="max-width: 100%;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" style="width: 200px; height: 200px;">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= item["full_name"] + " ##{count}" %></h5>
+            <p class="card-text">Repositório e link encrontados com a descrição fornecida.</p>
+            <p class="card-text">
+              <small class="text-muted">
+                <a href="<%= item["owner"]["html_url"] %>" target="_blank"><%= item["owner"]["html_url"] %></a>
+              </small>
+            </p>
+            <div style="text-align: right;">
+              <a class="link-secondar send-favorit-repo" style="cursor: pointer"><%= icon("bookmark-star") %></a>
+            </div>
+
+            <%= hidden_field_tag("url_set_favorites", searches_set_favorit_repos_path) %>
+
+            <form id="frm_favorite_data_<%= count %>" enctype="multipart/form-data">
+              <%= hidden_field_tag("search[query]", @query.to_s) %>
+              <%= hidden_field_tag("search[repo_name]", item["full_name"]) %>
+              <%= hidden_field_tag("search[repo_link]", item["owner"]["html_url"]) %>
+              <%= hidden_field_tag("search[repo_id]", item["owner"]["id"]) %>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <br><br>
+  <div class="alert alert-warning" role="alert">
+    Any founded repositorie!
+  </div>
+<% end %>
+
+<div style="text-align: right; margin: 0px 0px 100px 0px;">
+  <%= link_to "Search Again", root_path, class: "btn btn-warning" %>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  document.querySelectorAll(".send-favorit-repo").forEach((value) => {
+      value.addEventListener("click", (evt) => {
+          setFavoritRepo(
+              getFormDataFormatted(getFormNow(getCardBody(evt)))
+          );
+      });
+  });
+
+  function getCardBody(evt) {
+      return evt.target.parentNode.parentNode.parentNode;
+  }
+
+  function getFormNow(frm_finded) {
+      return frm_finded.querySelector("form");
+  }
+
+  function getFormDataFormatted(form) {
+      let value = Array.from(
+          new FormData(form),
+          e => e.map(encodeURIComponent).join('=')
+      ).join('&');
+
+      return value.toString();
+  }
+
+  function getUrlSetFavoritRepos() {
+      return document.querySelector("#url_set_favorites").value;
+  }
+
+  function setFavoritRepo(formatted_params) {
+      fetch(`${getUrlSetFavoritRepos()}?${formatted_params}`).then((data) => console.log(data.body));
+  }
+</script>
