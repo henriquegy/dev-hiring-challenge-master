@@ -1,5 +1,4 @@
-Eeste projeto está configurado para servir
-de báse em outras aplicações.
+O objetivo deste projéto é consumir a api de repositórios do github, listar os repos e guardar os favoritos.
 
 link para ver o app: https://devhiringchallenge.herokuapp.com/
 
