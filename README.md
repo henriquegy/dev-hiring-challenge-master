@@ -1,6 +1,8 @@
 Eeste projeto está configurado para servir
 de báse em outras aplicações.
 
+link para ver o app: https://devhiringchallenge.herokuapp.com/
+
 Já está pré-configurado:
 
 * Sidekick
@@ -8,9 +10,12 @@ Já está pré-configurado:
 * Cucumber
 * Rspac
 * Selenium-Webdriver
+* Factory-Bot
 
 Obersvação:
 
 * Verificar a versão:
-* Ruby, Bundler, Rails
-* Para não dar conflito de versão.
+  * Ruby, Bundler, Rails
+  * Para não dar conflito de versão.
+* Foi comentado no application.rb o factoy_bot, pois deu problema com o deploy do heroku,
+  caso queira testar não esqueça de descomentar.
